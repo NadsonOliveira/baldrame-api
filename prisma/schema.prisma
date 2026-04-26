@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Orcamento {
+  id                 String          @id @default(uuid())
+  empresa            String
+  numero_orcamento   String?
+  validade_dias      Int?
+  cliente            String?
+  tipo_obra          String?
+  nome_obra          String?
+  endereco           String?
+  total              Float           @default(0)
+  forma_pagamento    FormaPagamento?
+  entrada_percentual Int?
+  parcelas           Int?
+  valor_entrada      Float?
+  valor_parcela      Float?
+  prazo_dias         Int?
+  observacoes        String?
+  chave_pix          String?
+  telefone           String?
+  email              String?
+  created_at         DateTime        @default(now())
+  itens              ItemOrcamento[]
+}
+
+model ItemOrcamento {
+  id               String        @id @default(uuid())
+  orcamento_id     String
+  item_catalogo_id String?
+  descricao        String
+  unidade          String
+  quantidade       Float
+  preco_unitario   Float
+  total            Float
+  item_catalogo    ItemCatalogo? @relation(fields: [item_catalogo_id], references: [id])
+  orcamento        Orcamento     @relation(fields: [orcamento_id], references: [id], onDelete: Cascade)
+}
+
+model ItemCatalogo {
+  id           String          @id @default(uuid())
+  nome         String
+  descricao    String?
+  unidade      String
+  preco_padrao Float?
+  itens        ItemOrcamento[]
+}
+
+enum FormaPagamento {
+  PIX
+  BOLETO
+  CARTAO
+  DINHEIRO
+}
