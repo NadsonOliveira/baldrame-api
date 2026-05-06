@@ -9,7 +9,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/orcamentos
+      DATABASE_URL: postgres://postgres:Nadson1234@postgres:5432/orcamento_db
 
   postgres:
     image: postgres:15
@@ -18,9 +18,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_DB: orcamentos
+      POSTGRES_DB: orcamento_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: Nadson1234
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

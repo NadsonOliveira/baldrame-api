@@ -1,19 +1,26 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { AppModule } from './Orcamento/interfaces/http/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const config = new DocumentBuilder()
-    .setTitle('Baldrame example')
-    .setDescription('The baldrame API description')
-    .setVersion('1.0')
-    .addTag('baldrame')
-    .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  app.enableCors();
 
-  await app.listen(process.env.PORT ?? 3000);
+  const config = new DocumentBuilder()
+    .setTitle('Baldrame API')
+    .setDescription('API de Orçamentos e Catálogo')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+
+  SwaggerModule.setup('api', app, document);
+
+  await app.listen(process.env.PORT || 3000);
+
+  console.log(`🚀 Server running on http://localhost:3000`);
+  console.log(`📚 Swagger running on http://localhost:3000/api`);
 }
 bootstrap();
