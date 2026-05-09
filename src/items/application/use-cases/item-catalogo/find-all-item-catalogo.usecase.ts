@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ItemCatalogoRepository } from '../../../domain/repositories/item-catalogo.repository';
+import { ItemCatalogoRepository } from 'src/items/domain/repositories/item-catalogo.repository';
 
 @Injectable()
 export class FindAllItemCatalogoUseCase {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ItemCatalogoRepository } from '../../../domain/repositories/item-catalogo.repository';
 import { CreateItemCatalogoDto } from '../../dto/create-item-catalogo.dto';
+import { ItemCatalogoRepository } from 'src/items/domain/repositories/item-catalogo.repository';
 
 @Injectable()
 export class CreateItemCatalogoUseCase {
